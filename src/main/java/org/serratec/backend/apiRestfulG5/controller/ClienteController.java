@@ -20,6 +20,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping("/cliente")
 public class ClienteController {
@@ -28,6 +32,15 @@ public class ClienteController {
 	private ClienteRepository clienteRepository;
 	
 	@GetMapping
+	@ApiOperation(value="Lista todos os clientes", notes= "Listagem de clientes")
+	@ApiResponses(value = {
+			@ApiResponse(code= 200, message ="Retorna todos os clientes"),
+			@ApiResponse(code= 401, message= "Erro de autenticação"),
+			@ApiResponse(code= 403, message= "Você não tem permissão para acessar o recurso"),
+			@ApiResponse(code= 404, message= "Recurso não encontrado"),
+			@ApiResponse(code= 405, message= "Quando ocorre uma exceção")
+	})
+	
 	public List<Cliente> listarTodos(){
 		return clienteRepository.findAll();
 	}

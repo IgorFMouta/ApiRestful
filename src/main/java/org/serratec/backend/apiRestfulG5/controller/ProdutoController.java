@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.serratec.backend.apiRestfulG5.domain.Produto;
 import org.serratec.backend.apiRestfulG5.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 
 @RestController
@@ -26,8 +32,16 @@ public class ProdutoController {
 	@Autowired
 	private ProdutoRepository ProdutoRepository;
 
-	
+
 	@GetMapping
+	@ApiOperation(value="Lista todos os produtos", notes= "Listagem de produtos")
+	@ApiResponses(value = {
+			@ApiResponse(code= 200, message ="Retorna todos os produtos"),
+			@ApiResponse(code= 401, message= "Erro de autenticaÃ§Ã£o"),
+			@ApiResponse(code= 403, message= "VocÃª nÃ£o tem permissÃ£o para acessar o recurso"),
+			@ApiResponse(code= 404, message= "Recurso nÃ£o encontrado"),
+			@ApiResponse(code= 405, message= "Quando ocorre uma exceÃ§Ã£o")
+	})
 	public List <Produto> listarTodos(){
 		return ProdutoRepository.findAll();
 	}
@@ -41,7 +55,7 @@ public class ProdutoController {
 			return ResponseEntity.notFound().build();
 		} 
 	@PostMapping
-	//@ResponseBody(HttpStatus.CREATED) está dando erro
+	@ResponseStatus(HttpStatus.CREATED)
 	public Produto inserir(@Valid @RequestBody Produto produto){
 		ProdutoRepository.save(produto);
 		return produto;

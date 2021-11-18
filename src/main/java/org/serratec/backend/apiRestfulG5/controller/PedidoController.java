@@ -2,9 +2,7 @@ package org.serratec.backend.apiRestfulG5.controller;
 
 import java.net.URI;
 import java.util.List;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,11 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import br.org.serratec.backend.ecommerce.exception.DataNotFoundException;
-import br.org.serratec.backend.ecommerce.model.dto.PedidoDTO;
-import br.org.serratec.backend.ecommerce.model.dto.PedidoSimplesDTO;
-import br.org.serratec.backend.ecommerce.service.PedidoService;
+import org.serratec.backend.apiRestfulG5.exception.DataNotFoundException;
+import org.serratec.backend.apiRestfulG5.model.DTO.PedidoDTO;
+import org.serratec.backend.apiRestfulG5.model.DTO.PedidoSimplesDTO;
+import org.serratec.backend.apiRestfulG5.service.PedidoService;
 import io.swagger.annotations.ApiOperation;
 
 
@@ -54,7 +51,8 @@ public class PedidoController {
 
 	@ApiOperation("Retorna um único pedido")
 	@GetMapping(path="/{id}", produces = {MediaType.APPLICATION_JSON_VALUE} )
-	public ResponseEntity<PedidoDTO> listarPorId(@PathVariable Integer id) throws DataNotFoundException {
+	public ResponseEntity<PedidoDTO> listarPorId(@PathVariable Integer id) 
+			throws DataNotFoundException {
 		PedidoDTO pedido = pedidoService.listarPorId(id);
 		return ResponseEntity.ok(pedido);
 	}
@@ -65,6 +63,5 @@ public class PedidoController {
 	public void deletar(@PathVariable Integer id) throws DataNotFoundException {
 		pedidoService.deletar(id);
 	}
-	
 
 }

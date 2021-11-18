@@ -4,18 +4,15 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
-
 import static java.util.stream.Collectors.toList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import br.org.serratec.backend.ecommerce.exception.DataNotFoundException;
+import org.serratec.backend.apiRestfulG5.exception.DataNotFoundException;
 import org.serratec.backend.apiRestfulG5.domain.Pedido;
-import br.org.serratec.backend.ecommerce.model.dto.PedidoDTO;
-import br.org.serratec.backend.ecommerce.model.dto.PedidoSimplesDTO;
-import br.org.serratec.backend.ecommerce.repository.PedidoRepository;
-import br.org.serratec.backend.ecommerce.service.mapper.PedidoMapper;
+import org.serratec.backend.apiRestfulG5.model.DTO.PedidoDTO;
+import org.serratec.backend.apiRestfulG5.model.DTO.PedidoSimplesDTO;
+import org.serratec.backend.apiRestfulG5.repository.PedidoRepository;
+import org.serratec.backend.apiRestfulG5.mapper.PedidoMapper;
 
 @Service
 public class PedidoService {

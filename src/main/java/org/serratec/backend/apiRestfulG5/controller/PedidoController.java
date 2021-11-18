@@ -65,6 +65,5 @@ public class PedidoController {
 	public void deletar(@PathVariable Integer id) throws DataNotFoundException {
 		pedidoService.deletar(id);
 	}
-	
 
 }

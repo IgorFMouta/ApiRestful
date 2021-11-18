@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 import org.serratec.backend.apiRestfulG5.exception.DataNotFoundException;
 import org.serratec.backend.apiRestfulG5.domain.Pedido;
 import org.serratec.backend.apiRestfulG5.model.DTO.PedidoDTO;
-import br.org.serratec.backend.ecommerce.model.dto.PedidoSimplesDTO;
+import org.serratec.backend.apiRestfulG5.model.DTO.PedidoSimplesDTO;
 import org.serratec.backend.apiRestfulG5.repository.PedidoRepository;
-import br.org.serratec.backend.ecommerce.service.mapper.PedidoMapper;
+import org.serratec.backend.apiRestfulG5.mapper.PedidoMapper;
 
 @Service
 public class PedidoService {

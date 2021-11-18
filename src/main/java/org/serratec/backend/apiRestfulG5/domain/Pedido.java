@@ -17,12 +17,11 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import org.serratec.backend.apiRestfulG5.enums.PedidoStatus;
 
-//import br.org.serratec.backend.ecommerce.enums.PedidoStatus;
-//import lombok.Data;
+import lombok.Data;
 
 @Entity
 @Table(name = "pedido")
-// @Data
+@Data
 public class Pedido {
 
 	@Id
@@ -41,13 +40,13 @@ public class Pedido {
 	private Cliente cliente;
 
 	@OneToMany(mappedBy = "id.pedido")
-	private Set<Item_pedido> itens = new HashSet<>();
+	private Set<ItemPedido> itens = new HashSet<>();
 
 
 	@Transient
 	public Double getTotal() {
 		double soma = 0.0;
-		for(Item_pedido item : itens) {
+		for(ItemPedido item : itens) {
 			soma += item.getSubTotal();
 		}
 		return soma;

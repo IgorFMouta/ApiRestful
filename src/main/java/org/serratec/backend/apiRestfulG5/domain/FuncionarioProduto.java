@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "FuncionarioPedido")
-public class FuncionarioPedido {
+public class FuncionarioProduto {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,11 +21,21 @@ public class FuncionarioPedido {
 	@ManyToOne
 	@JoinColumn(name = "id_produto", referencedColumnName = "id", nullable = false)
 	private Pedido pedido;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_funcionario", referencedColumnName = "id", nullable = false)
+	private Funcionario funcionario;
 
-	public FuncionarioPedido(Long idFuncionarioPedido, Pedido pedido) {
+	
+	public FuncionarioProduto() {
+		super();
+	}
+
+	public FuncionarioProduto(Long idFuncionarioPedido, Pedido pedido, Funcionario funcionario) {
 		super();
 		this.idFuncionarioPedido = idFuncionarioPedido;
 		this.pedido = pedido;
+		this.funcionario = funcionario;
 	}
 
 	public Long getIdFuncionarioPedido() {
@@ -44,6 +54,14 @@ public class FuncionarioPedido {
 		this.pedido = pedido;
 	}
 
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(idFuncionarioPedido, pedido);
@@ -57,9 +75,13 @@ public class FuncionarioPedido {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		FuncionarioPedido other = (FuncionarioPedido) obj;
+		FuncionarioProduto other = (FuncionarioProduto) obj;
 		return Objects.equals(idFuncionarioPedido, other.idFuncionarioPedido) && Objects.equals(pedido, other.pedido);
 	}
+	
+	
+	
+	
 	
 	
 	

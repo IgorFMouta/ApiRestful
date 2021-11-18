@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.org.serratec.backend.ecommerce.exception.DataNotFoundException;
-import br.org.serratec.backend.ecommerce.model.dto.PedidoDTO;
+import org.serratec.backend.apiRestfulG5.model.DTO.PedidoDTO;
 import br.org.serratec.backend.ecommerce.model.dto.PedidoSimplesDTO;
-import br.org.serratec.backend.ecommerce.service.PedidoService;
+import org.serratec.backend.apiRestfulG5.service.PedidoService;
 import io.swagger.annotations.ApiOperation;
 
 

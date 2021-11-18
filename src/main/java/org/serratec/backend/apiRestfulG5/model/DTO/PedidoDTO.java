@@ -2,6 +2,7 @@ package org.serratec.backend.apiRestfulG5.model.DTO;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import javax.validation.Valid;
@@ -28,6 +29,11 @@ public class PedidoDTO {
 	private Set<Item_PedidoDTO> itens = new HashSet<>();
 
     private Double total;
+
+	public Map<String, ?> getId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 }

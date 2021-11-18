@@ -25,7 +25,7 @@ public class PedidoDTO {
 	private Integer idCliente;
 	private String nomeCliente;
 
-	private Set<Item_PedidoDTO> itens = new HashSet<>();
+	private Set<ItemPedidoDTO> itens = new HashSet<>();
 
     private Double total;
 

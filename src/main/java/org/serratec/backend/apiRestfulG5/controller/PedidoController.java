@@ -51,7 +51,8 @@ public class PedidoController {
 
 	@ApiOperation("Retorna um único pedido")
 	@GetMapping(path="/{id}", produces = {MediaType.APPLICATION_JSON_VALUE} )
-	public ResponseEntity<PedidoDTO> listarPorId(@PathVariable Integer id) throws DataNotFoundException {
+	public ResponseEntity<PedidoDTO> listarPorId(@PathVariable Integer id) 
+			throws DataNotFoundException {
 		PedidoDTO pedido = pedidoService.listarPorId(id);
 		return ResponseEntity.ok(pedido);
 	}

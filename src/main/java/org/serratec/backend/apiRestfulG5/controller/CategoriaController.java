@@ -1,13 +1,13 @@
 package org.serratec.backend.apiRestfulG5.controller;
 
 import java.util.List;
-import java.util.Optional;
-
-import javax.validation.Valid;
 
 import org.serratec.backend.apiRestfulG5.domain.Categoria;
-import org.serratec.backend.apiRestfulG5.repository.CategoriaRepository;
+import org.serratec.backend.apiRestfulG5.exception.CategoriaNotFoundException;
+import org.serratec.backend.apiRestfulG5.exception.ParametroObrigatorioException;
+import org.serratec.backend.apiRestfulG5.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,54 +22,34 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/categoria")
 public class CategoriaController {
 	
-	
 	@Autowired
-	private CategoriaRepository CategoriaRepository;
-
+	private CategoriaService categoriaService;
+	
+	@PostMapping
+	public ResponseEntity<Void> inserir(@RequestBody Categoria categoria) {
+	    categoriaService.inserir(categoria);
+		return new ResponseEntity<Void>(HttpStatus.CREATED);
+	}
 	
 	@GetMapping
-	public List <Categoria> listarTodos(){
-		return CategoriaRepository.findAll();
+	public List<Categoria> listar() {
+		return categoriaService.listar();
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Categoria> listarPorId(@PathVariable Long id_categoria) {
-		Optional<Categoria> categoria = CategoriaRepository.findById(id_categoria);
-		if(categoria.isPresent()) {
-			return ResponseEntity.ok(categoria.get());
-			}
-			return ResponseEntity.notFound().build();
-		} 
-	@PostMapping
-	//@ResponseBody(HttpStatus.CREATED) está dando erro
-	public Categoria inserir(@Valid @RequestBody Categoria categoria){
-		CategoriaRepository.save(categoria);
-		return categoria;
-	}
-	@PutMapping("/{id}")
-	public ResponseEntity<Categoria> atualizar(@PathVariable Long id_categoria, @Valid @RequestBody Categoria categoria){
-		Optional<Categoria> categoria1 = CategoriaRepository.findById(id_categoria);
-			if(categoria1.isPresent()) {
-			if(null != categoria.getNome()) {
-				categoria1.get().setNome(categoria.getNome());
-			}
-			if(null != categoria.getDescricao()) {
-				categoria1.get().setDescricao(categoria.getDescricao());
-			}
-		}
-		else {
-			return ResponseEntity.notFound().build();
-		}
-		return ResponseEntity.ok(CategoriaRepository.save(categoria1.get()));
-	}
-	@DeleteMapping("{id}")
-	public ResponseEntity <Void> deletarPorId(@PathVariable Long id_categoria){
-		if(!CategoriaRepository.existsById(id_categoria)) {
-			return ResponseEntity.notFound().build();
-		}
-		CategoriaRepository.deleteById(id_categoria);
-		return ResponseEntity.noContent().build();
+	public Categoria listarPorId(@PathVariable Long id_categoria) throws CategoriaNotFoundException {
+		return categoriaService.listarPorId(id_categoria);
 	}
 	
-
+	@PutMapping("/{id}")
+	public ResponseEntity<Void> atualizar(@PathVariable Long id_categoria, @RequestBody(required = true) Categoria categoria)
+			throws CategoriaNotFoundException, ParametroObrigatorioException {
+		categoriaService.atualizar(id_categoria, categoria);
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/{id}")
+	public void deletarPorId(@PathVariable Long id_categoria) throws CategoriaNotFoundException {
+		categoriaService.deletarPorId(id_categoria);
+	}
 }

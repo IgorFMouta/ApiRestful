@@ -8,7 +8,6 @@ import org.serratec.backend.apiRestfulG5.exception.ParametroObrigatorioException
 import org.serratec.backend.apiRestfulG5.exception.ProdutoNotFoundException;
 import org.serratec.backend.apiRestfulG5.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service

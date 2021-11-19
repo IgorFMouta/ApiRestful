@@ -9,27 +9,30 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
+import org.serratec.backend.apiRestfulG5.enums.PedidoStatus;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
-@Table(name="PEDIDO")
+@Table(name="Pedido")
 public class Pedido {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer IdPedido;
 	
-	@Column(name="DATA_PEDIDO")
+	@Column(name="Data_Pedido")
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(iso = ISO.DATE)
 	private Date dataPedido;
 	
-	@Column(name="VALOR")
+	@Column(name="Status", nullable = false)
+	private PedidoStatus pedidoStatus;
+	
+	@Column(name="Valor")
 	private Double valor;
 	
-	@Column(name="CODIGO_CLIENTE", nullable = false)
+	@Column(name="Codigo_Cliente", nullable = false)
 	private Integer idCliente;
 	
 	public Integer getIdPedido() {

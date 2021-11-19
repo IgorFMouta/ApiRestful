@@ -8,9 +8,10 @@ import org.serratec.backend.apiRestfulG5.exception.ParametroObrigatorioException
 import org.serratec.backend.apiRestfulG5.exception.CategoriaNotFoundException;
 import org.serratec.backend.apiRestfulG5.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CategoriaService {
-
 
 	@Autowired
      CategoriaRepository categoriaRepository;
@@ -36,7 +37,7 @@ public class CategoriaService {
 	}
 
 	
-	public Categoria atualizar(Long id_categoria, Categoria categoria) throws ParametroObrigatorioException, CategoriaNotFoundException{
+	public Categoria substituir(Long id_categoria, Categoria categoria) throws ParametroObrigatorioException, CategoriaNotFoundException{
 		if(categoria == null) throw new ParametroObrigatorioException("Campo 'Categoria' é obrigatório");
 	
 		Categoria categoriaBanco = listarPorId(id_categoria);
@@ -52,7 +53,7 @@ public class CategoriaService {
 		return categoriaRepository.save(categoriaBanco);		
 	}
 		
-	public void deletarPorId(Long id_categoria) throws CategoriaNotFoundException{
+	public void deletar(Long id_categoria) throws CategoriaNotFoundException{
 		Categoria categoriaBanco = listarPorId(id_categoria);
 		categoriaRepository.delete(categoriaBanco);
 	}

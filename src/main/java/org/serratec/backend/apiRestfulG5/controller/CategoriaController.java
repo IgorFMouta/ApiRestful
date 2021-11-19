@@ -44,12 +44,12 @@ public class CategoriaController {
 	@PutMapping("/{id}")
 	public ResponseEntity<Void> atualizar(@PathVariable Long id_categoria, @RequestBody(required = true) Categoria categoria)
 			throws CategoriaNotFoundException, ParametroObrigatorioException {
-		categoriaService.atualizar(id_categoria, categoria);
+		categoriaService.substituir(id_categoria, categoria);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}")
-	public void deletarPorId(@PathVariable Long id_categoria) throws CategoriaNotFoundException {
-		categoriaService.deletarPorId(id_categoria);
+	public void deletar(@PathVariable Long id_categoria) throws CategoriaNotFoundException {
+		categoriaService.deletar(id_categoria);
 	}
 }

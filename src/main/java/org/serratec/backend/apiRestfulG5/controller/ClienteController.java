@@ -6,7 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.serratec.backend.apiRestfulG5.domain.Cliente;
-import org.serratec.backend.apiRestfulG5.repository.ClienteRepository;
+import org.serratec.backend.apiRestfulG5.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +29,7 @@ import io.swagger.annotations.ApiResponses;
 public class ClienteController {
 	
 	@Autowired
-	private ClienteRepository clienteRepository;
+	private ClienteService clienteService;
 	
 	@GetMapping
 	@ApiOperation(value="Lista todos os clientes", notes= "Listagem de clientes")
@@ -41,63 +41,31 @@ public class ClienteController {
 			@ApiResponse(code= 405, message= "Quando ocorre uma exceção")
 	})
 	
+	@PostMapping
+	public ResponseEntity<Void> inserir(@RequestBody Cliente cliente) {
+		clienteService.inserir(cliente);
+		return new ResponseEntity<Void>(HttpStatus.CREATED);
+	}
+	
 	public List<Cliente> listarTodos(){
-		return clienteRepository.findAll();
+		return clienteService.listar();
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Cliente> pesquisarPorId(@PathVariable Long id){
-		Optional<Cliente> cliente = clienteRepository.findById(id);
-		if(cliente.isPresent()) {
-			return ResponseEntity.ok(cliente.get());
-		}
-		return ResponseEntity.notFound().build();
+	public Cliente pesquisarPorId(@PathVariable Integer id) throws ClienteNotFoundException {
+		return clienteService.pesquisarPorId(id);
 	}
 	
-	@PostMapping
-	@ResponseStatus(HttpStatus.CREATED)
-	public Cliente inserir(@Valid @RequestBody Cliente cliente){
-		clienteRepository.save(cliente);
-		return cliente;
-	}
 	@PutMapping("/{id}")
-	public ResponseEntity<Cliente> atualizar(@PathVariable Long id, @Valid @RequestBody Cliente cliente){
-		Optional<Cliente> cliente1 = clienteRepository.findById(id);
-			if(cliente1.isPresent()) {
-			if(null != cliente.getNome_cliente()) {
-				cliente1.get().setNome_cliente(cliente.getNome_cliente());
-			}
-			if(null != cliente.getNome_usuario()) {
-				cliente1.get().setNome_usuario(cliente.getNome_usuario());
-			}
-			if(null != cliente.getEmail()) {
-				cliente1.get().setEmail(cliente.getEmail());
-			}
-			if(null != cliente.getSenha()) {
-				cliente1.get().setSenha(cliente.getSenha());
-			}
-			if(null != cliente.getCpf()) {
-				cliente1.get().setCpf(cliente.getCpf());
-			}
-			if(null != cliente.getDataNasc()) {
-				cliente1.get().setDataNasc(cliente.getDataNasc());
-			}
-			if(null != cliente.getTelefone()) {
-				cliente1.get().setTelefone(cliente.getTelefone());
-			}
-		}
-			else {
-				return ResponseEntity.notFound().build();
-			}
-			return ResponseEntity.ok(clienteRepository.save(cliente1.get()));
-		}
-	@DeleteMapping("{id}")
-	public ResponseEntity <Void> deletarPorId(@PathVariable Long id){
-		if(!clienteRepository.existsById(id)) {
-			return ResponseEntity.notFound().build();
-		}
-		clienteRepository.deleteById(id);
-		return ResponseEntity.noContent().build();
+	public ResponseEntity<Void> atualizar(@PathVariable Integer id, @RequestBody(required = true) Cliente cliente)
+			throws ClienteNotFoundException, ParametroObrigatorioException {
+		clienteService.atualizar(id, cliente);
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/{id}")
+	public void deletarPorId(@PathVariable Integer id) throws ClienteNotFoundException {
+		clienteService.deletarPorId(id);
 	}
 }
 

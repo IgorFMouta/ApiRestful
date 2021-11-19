@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.serratec.backend.apiRestfulG5.domain.Endereco;
+import org.serratec.backend.apiRestfulG5.exception.EnderecoNotFoundException;
+import org.serratec.backend.apiRestfulG5.exception.ParametroObrigatorioException;
 import org.serratec.backend.apiRestfulG5.repository.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -67,7 +69,7 @@ public class EnderecoService {
 	
 	public void deletarPorId(Integer id) throws EnderecoNotFoundException{
 		Endereco endereco1 = pesquisarPorId(id);
-		enderecoRepository.deletarPorId(endereco1);
+		enderecoRepository.delete(endereco1);
 	
 	}
 }

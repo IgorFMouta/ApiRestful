@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.serratec.backend.apiRestfulG5.domain.Cliente;
+import org.serratec.backend.apiRestfulG5.exception.ClienteNotFoundException;
+import org.serratec.backend.apiRestfulG5.exception.ParametroObrigatorioException;
 import org.serratec.backend.apiRestfulG5.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -69,7 +71,7 @@ public class ClienteService {
 	
 	public void deletarPorId(Integer id) throws ClienteNotFoundException{
 		Cliente cliente1 = pesquisarPorId(id);
-		clienteRepository.deletarPorId(cliente1);
+		clienteRepository.delete(cliente1);
 	}
 }
 

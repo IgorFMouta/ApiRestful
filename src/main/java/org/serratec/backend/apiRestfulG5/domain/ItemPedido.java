@@ -1,5 +1,7 @@
 package org.serratec.backend.apiRestfulG5.domain;
 
+import java.util.Objects;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -70,6 +72,31 @@ public class ItemPedido {
 
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
+	}
+
+	@Override
+	public String toString() {
+		return "ItemPedido [id_item_pedido=" + id_item_pedido + ", quantidade=" + quantidade + ", preco_venda="
+				+ preco_venda + ", produto=" + produto + ", pedido=" + pedido + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id_item_pedido, pedido, preco_venda, produto, quantidade);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ItemPedido other = (ItemPedido) obj;
+		return Objects.equals(id_item_pedido, other.id_item_pedido) && Objects.equals(pedido, other.pedido)
+				&& Objects.equals(preco_venda, other.preco_venda) && Objects.equals(produto, other.produto)
+				&& Objects.equals(quantidade, other.quantidade);
 	}
 	
 	

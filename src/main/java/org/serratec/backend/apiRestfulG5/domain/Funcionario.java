@@ -24,8 +24,8 @@ public class Funcionario {
 	@Column (name = "cpf_funcionario", length = 15, unique = true, nullable = false)
 	private String cpf;
 	
-	@OneToMany(mappedBy = "funcionario")
-    private List<Produto> Produto;
+//	@OneToMany(mappedBy = "funcionario")
+//    private List<Produto> Produto;
 	
 	public Integer getId() {
 		return id;

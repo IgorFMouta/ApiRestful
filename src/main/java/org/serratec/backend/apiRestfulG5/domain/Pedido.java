@@ -26,14 +26,14 @@ public class Pedido {
 	@DateTimeFormat(iso = ISO.DATE)
 	private Date dataPedido;
 	
-	@Column(name="Status", nullable = false)
-	private PedidoStatus pedidoStatus;
-	
 	@Column(name="Valor")
 	private Double valor;
 	
 	@Column(name="Codigo_Cliente", nullable = false)
 	private Integer idCliente;
+	
+	@Column(name="Status", nullable = false)
+	private PedidoStatus pedidoStatus;
 	
 	public Integer getIdPedido() {
 		return IdPedido;

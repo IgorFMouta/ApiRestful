@@ -3,6 +3,8 @@ package org.serratec.backend.apiRestfulG5.controller;
 import java.util.List;
 
 import org.serratec.backend.apiRestfulG5.domain.Funcionario;
+import org.serratec.backend.apiRestfulG5.exception.FuncionarioNotFoundException;
+import org.serratec.backend.apiRestfulG5.exception.ParametroObrigatorioException;
 import org.serratec.backend.apiRestfulG5.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

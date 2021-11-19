@@ -1,4 +1,4 @@
-package org.serratec.backend.projetoFinal.exception;
+package org.serratec.backend.apiRestfulG5.exception;
 
 public class ParametroObrigatorioException extends Exception {
 

@@ -1,66 +1,55 @@
 package org.serratec.backend.apiRestfulG5.controller;
 
-import java.net.URI;
 import java.util.List;
-import javax.validation.Valid;
+import org.serratec.backend.apiRestfulG5.exception.DataNotFoundException;
+import org.serratec.backend.apiRestfulG5.exception.ParametroObrigatorioException;
+import org.serratec.backend.apiRestfulG5.exception.PedidoNotFoundException;
+import org.serratec.backend.apiRestfulG5.domain.Pedido;
+import org.serratec.backend.apiRestfulG5.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import org.serratec.backend.apiRestfulG5.exception.DataNotFoundException;
-import org.serratec.backend.apiRestfulG5.model.DTO.PedidoDTO;
-import org.serratec.backend.apiRestfulG5.model.DTO.PedidoSimplesDTO;
-import org.serratec.backend.apiRestfulG5.service.PedidoService;
-import io.swagger.annotations.ApiOperation;
-
 
 @RestController
-@RequestMapping ("/pedido")
-
+@RequestMapping("/api/pedido")
 public class PedidoController {
-	
+
 	@Autowired
 	private PedidoService pedidoService;
-
-	@ApiOperation("Permite incluir um pedido")
-	@PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE},
-			     produces = {MediaType.APPLICATION_JSON_VALUE} )
-	public ResponseEntity<PedidoDTO> inserir(@Valid @RequestBody PedidoDTO pedido) {
-		PedidoDTO pedidoDTO = pedidoService.inserir(pedido);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-          .path("/{id}")
-          .buildAndExpand(pedidoDTO.getId())
-          .toUri();
-		return ResponseEntity.created(uri).body(pedidoDTO);
+	
+	@PostMapping
+	public ResponseEntity<Void> inserir(@RequestBody Pedido pedido) {
+		pedidoService.inserir(pedido);
+		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
-
-	@ApiOperation("Retorna uma lista de pedidos")
-	@GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE} )
-	public ResponseEntity<List<PedidoSimplesDTO>> listar() {
-		return ResponseEntity.ok(pedidoService.listar());
+	
+	@GetMapping
+	public List<Pedido> listar() {
+		return pedidoService.listar();
 	}
-
-	@ApiOperation("Retorna um único pedido")
-	@GetMapping(path="/{id}", produces = {MediaType.APPLICATION_JSON_VALUE} )
-	public ResponseEntity<PedidoDTO> listarPorId(@PathVariable Integer id) 
-			throws DataNotFoundException {
-		PedidoDTO pedido = pedidoService.listarPorId(id);
-		return ResponseEntity.ok(pedido);
+	
+	@GetMapping("/{id}")
+	public Pedido listarPorId(@PathVariable Integer id) throws PedidoNotFoundException, DataNotFoundException {
+		return pedidoService.listarPorid(id);
 	}
-
-	@ApiOperation("E")
-	@ResponseStatus(code=HttpStatus.OK)
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<Void> substituir(@PathVariable Integer id, @RequestBody(required = true) Pedido pedido)
+			throws PedidoNotFoundException, ParametroObrigatorioException, DataNotFoundException {
+		pedidoService.substituir(id, pedido);
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
 	@DeleteMapping("/{id}")
-	public void deletar(@PathVariable Integer id) throws DataNotFoundException {
+	public void deletar(@PathVariable Integer id) throws PedidoNotFoundException, DataNotFoundException {
 		pedidoService.deletar(id);
 	}
 

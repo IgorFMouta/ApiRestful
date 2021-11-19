@@ -25,7 +25,7 @@ public class Funcionario {
 	private String cpf;
 	
 	@OneToMany(mappedBy = "funcionario")
-    private List<FuncionarioProduto> funcionarioProduto;
+    private List<Produto> Produto;
 	
 	public Integer getId() {
 		return id;

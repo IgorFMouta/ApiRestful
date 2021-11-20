@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import org.serratec.backend.apiRestfulG5.domain.Funcionario;
 import org.serratec.backend.apiRestfulG5.exception.FuncionarioNotFoundException;
-import org.serratec.backend.apiRestfulG5.exception.ParametroObrigatorioException;
+import org.serratec.backend.apiRestfulG5.exception.ParameterException;
 import org.serratec.backend.apiRestfulG5.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,8 +32,8 @@ public class FuncionarioService {
 		
 		throw new FuncionarioNotFoundException("Funcionario com id " + id + " não encontrada");
 	}
-	public Funcionario atualizar(Integer id, Funcionario funcionario) throws ParametroObrigatorioException, FuncionarioNotFoundException {
-		if(funcionario == null) throw new ParametroObrigatorioException("Campo 'Funcionario' é obrigatório");
+	public Funcionario atualizar(Integer id, Funcionario funcionario) throws ParameterException, FuncionarioNotFoundException {
+		if(funcionario == null) throw new ParameterException("Campo 'Funcionario' é obrigatório");
 		
 		Funcionario funcionario1 = pesquisarPorId(id);
 		
@@ -49,7 +49,6 @@ public class FuncionarioService {
 	}
 	
 	public void deletarPorId(Integer id) throws FuncionarioNotFoundException{
-		Funcionario funcionario1 = pesquisarPorId(id);
-		funcionarioRepository.delete(funcionario1);
+		funcionarioRepository.deleteById(id);
 	}
 }

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.serratec.backend.apiRestfulG5.domain.Cliente;
 import org.serratec.backend.apiRestfulG5.exception.ClienteNotFoundException;
-import org.serratec.backend.apiRestfulG5.exception.ParametroObrigatorioException;
+import org.serratec.backend.apiRestfulG5.exception.ParameterException;
 import org.serratec.backend.apiRestfulG5.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,6 +38,10 @@ public class ClienteController {
 			@ApiResponse(code= 404, message= "Recurso não encontrado"),
 			@ApiResponse(code= 405, message= "Quando ocorre uma exceção")
 	})
+
+	public List<Cliente> listarTodos(){
+		return clienteService.listar();
+	}
 	
 	@PostMapping
 	public ResponseEntity<Void> inserir(@RequestBody Cliente cliente) {
@@ -45,9 +49,6 @@ public class ClienteController {
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
 	
-	public List<Cliente> listarTodos(){
-		return clienteService.listar();
-	}
 
 	@GetMapping("/{id}")
 	public Cliente pesquisarPorId(@PathVariable Integer id) throws ClienteNotFoundException {
@@ -56,7 +57,7 @@ public class ClienteController {
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<Void> atualizar(@PathVariable Integer id, @RequestBody(required = true) Cliente cliente)
-			throws ClienteNotFoundException, ParametroObrigatorioException {
+			throws ClienteNotFoundException, ParameterException {
 		clienteService.atualizar(id, cliente);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}

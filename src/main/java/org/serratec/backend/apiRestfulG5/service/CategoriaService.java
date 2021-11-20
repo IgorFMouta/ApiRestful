@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.serratec.backend.apiRestfulG5.domain.Categoria;
-import org.serratec.backend.apiRestfulG5.exception.ParametroObrigatorioException;
+import org.serratec.backend.apiRestfulG5.exception.ParameterException;
 import org.serratec.backend.apiRestfulG5.exception.CategoriaNotFoundException;
 import org.serratec.backend.apiRestfulG5.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class CategoriaService {
 	}
 	
 	
-	public Categoria listarPorId(Long id_categoria) throws CategoriaNotFoundException {
+	public Categoria listarPorId(Integer id_categoria) throws CategoriaNotFoundException {
 		Optional<Categoria> opCategoria = categoriaRepository.findById(id_categoria);
 		
 		if(opCategoria.isPresent()) {
@@ -37,8 +37,8 @@ public class CategoriaService {
 	}
 
 	
-	public Categoria substituir(Long id_categoria, Categoria categoria) throws ParametroObrigatorioException, CategoriaNotFoundException{
-		if(categoria == null) throw new ParametroObrigatorioException("Campo 'Categoria' é obrigatório");
+	public Categoria substituir(Integer id_categoria, Categoria categoria) throws ParameterException, CategoriaNotFoundException{
+		if(categoria == null) throw new ParameterException("Campo 'Categoria' é obrigatório");
 	
 		Categoria categoriaBanco = listarPorId(id_categoria);
 		
@@ -53,9 +53,9 @@ public class CategoriaService {
 		return categoriaRepository.save(categoriaBanco);		
 	}
 		
-	public void deletar(Long id_categoria) throws CategoriaNotFoundException{
-		Categoria categoriaBanco = listarPorId(id_categoria);
-		categoriaRepository.delete(categoriaBanco);
+	public void deletar(Integer id_categoria) throws CategoriaNotFoundException{
+//		Categoria categoriaBanco = listarPorId(id_categoria);
+		categoriaRepository.deleteById(id_categoria);
 	}
 
 }

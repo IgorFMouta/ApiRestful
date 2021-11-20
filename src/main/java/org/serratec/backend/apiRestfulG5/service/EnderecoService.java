@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.serratec.backend.apiRestfulG5.domain.Endereco;
 import org.serratec.backend.apiRestfulG5.exception.EnderecoNotFoundException;
-import org.serratec.backend.apiRestfulG5.exception.ParametroObrigatorioException;
+import org.serratec.backend.apiRestfulG5.exception.ParameterException;
 import org.serratec.backend.apiRestfulG5.repository.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,8 +33,8 @@ public class EnderecoService {
 		
 		throw new EnderecoNotFoundException("Endereco com id " + id + " não encontrada");
 	}
-	public Endereco atualizar(Integer id, Endereco endereco) throws ParametroObrigatorioException, EnderecoNotFoundException {
-		if(endereco == null) throw new ParametroObrigatorioException("Campo 'Endereco' é obrigatório");
+	public Endereco atualizar(Integer id, Endereco endereco) throws ParameterException, EnderecoNotFoundException {
+		if(endereco == null) throw new ParameterException("Campo 'Endereco' é obrigatório");
 		
 		Endereco endereco1 = pesquisarPorId(id);
 		
@@ -70,8 +70,7 @@ public class EnderecoService {
 	}
 	
 	public void deletarPorId(Integer id) throws EnderecoNotFoundException{
-		Endereco endereco1 = pesquisarPorId(id);
-		enderecoRepository.delete(endereco1);
+		enderecoRepository.deleteById(id);
 	
 	}
 }

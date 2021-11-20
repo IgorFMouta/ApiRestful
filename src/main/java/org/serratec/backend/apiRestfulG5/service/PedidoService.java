@@ -3,7 +3,7 @@ package org.serratec.backend.apiRestfulG5.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.serratec.backend.apiRestfulG5.exception.ParametroObrigatorioException;
+import org.serratec.backend.apiRestfulG5.exception.ParameterException;
 import org.serratec.backend.apiRestfulG5.exception.DataNotFoundException;
 import org.serratec.backend.apiRestfulG5.domain.Pedido;
 import org.serratec.backend.apiRestfulG5.repository.PedidoRepository;
@@ -23,26 +23,23 @@ public class PedidoService {
 		return pedidoRepository.findAll();
 	}
 
-	public Pedido listarPorid(Integer id) throws DataNotFoundException {
-		Optional<Pedido> opPedido = pedidoRepository.findById(id);
+	public Pedido listarPorid(Integer idPedido) throws DataNotFoundException {
+		Optional<Pedido> opPedido = pedidoRepository.findById(idPedido);
 
 		if (opPedido.isPresent()) {
 			return opPedido.get();
 		}
 
-		throw new DataNotFoundException("Pedido com código " + id + " não encontrada");
+		throw new DataNotFoundException("Pedido com código " + idPedido + " não encontrada");
 	}
 
-	public Pedido substituir(Integer codigo, Pedido pedido)
-			throws ParametroObrigatorioException, DataNotFoundException {
+	public Pedido substituir(Integer idPedido, Pedido pedido)
+			throws ParameterException, DataNotFoundException {
 		if (pedido == null)
-			throw new ParametroObrigatorioException("Campo 'Pedido' é obrigatório");
+			throw new ParameterException("Campo 'Pedido' é obrigatório");
 
-		Pedido pedidoNoBanco = listarPorid(codigo);
+		Pedido pedidoNoBanco = listarPorid(idPedido);
 
-		if (pedido.getIdCliente() != null) {
-			pedidoNoBanco.setIdCliente(pedido.getIdCliente());
-		}
 
 		if (pedido.getIdPedido() != null) {
 			pedidoNoBanco.setIdPedido(pedido.getIdPedido());
@@ -59,8 +56,7 @@ public class PedidoService {
 		return pedidoRepository.save(pedidoNoBanco);
 	}
 
-	public void deletar(Integer codigo) throws DataNotFoundException {
-		Pedido pedidoNoBanco = listarPorid(codigo);
-		pedidoRepository.delete(pedidoNoBanco);
+	public void deletar(Integer idPedido) throws DataNotFoundException {
+		pedidoRepository.deleteById(idPedido);
 	}
 }

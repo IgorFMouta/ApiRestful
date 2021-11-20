@@ -2,7 +2,7 @@ package org.serratec.backend.apiRestfulG5.controller;
 
 import java.util.List;
 import org.serratec.backend.apiRestfulG5.exception.DataNotFoundException;
-import org.serratec.backend.apiRestfulG5.exception.ParametroObrigatorioException;
+import org.serratec.backend.apiRestfulG5.exception.ParameterException;
 import org.serratec.backend.apiRestfulG5.exception.PedidoNotFoundException;
 import org.serratec.backend.apiRestfulG5.domain.Pedido;
 import org.serratec.backend.apiRestfulG5.service.PedidoService;
@@ -36,19 +36,19 @@ public class PedidoController {
 		return pedidoService.listar();
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/{idPedido}")
 	public Pedido listarPorId(@PathVariable Integer id) throws PedidoNotFoundException, DataNotFoundException {
 		return pedidoService.listarPorid(id);
 	}
 	
-	@PutMapping("/{id}")
+	@PutMapping("/{idPedido}")
 	public ResponseEntity<Void> substituir(@PathVariable Integer id, @RequestBody(required = true) Pedido pedido)
-			throws PedidoNotFoundException, ParametroObrigatorioException, DataNotFoundException {
+			throws PedidoNotFoundException, ParameterException, DataNotFoundException {
 		pedidoService.substituir(id, pedido);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/{idPedido}")
 	public void deletar(@PathVariable Integer id) throws PedidoNotFoundException, DataNotFoundException {
 		pedidoService.deletar(id);
 	}

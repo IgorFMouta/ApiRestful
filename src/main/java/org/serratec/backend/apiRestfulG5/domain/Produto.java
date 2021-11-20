@@ -1,5 +1,6 @@
 package org.serratec.backend.apiRestfulG5.domain;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -16,7 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "", schema = "public")
+@Table(name = "produto", schema = "public")
 public class Produto {
 
 	@Id
@@ -29,7 +30,7 @@ public class Produto {
 	@Column(name = "descricao", length = 100, nullable = false)
 	private String descricao;
 
-	@Column(name = "Qtd_estoque", length = 100, nullable = false)
+	@Column(name = "Qtd_estoque", nullable = false)
 	private Integer Qtd_estoque;
 
 	@Column(name = "data_cadastro", nullable = false)
@@ -38,7 +39,7 @@ public class Produto {
 	@Column(name = "valor_unitario", nullable = false)
 	private Float valor_unitario;
 
-	@Column(name = "image")
+	@Column(name = "image", nullable = true)
 	private byte[] image;
 	
 	
@@ -121,6 +122,22 @@ public class Produto {
 		this.image = image;
 	}
 	
+	public Integer getId_produto() {
+		return id_produto;
+	}
+
+	public void setId_produto(Integer id_produto) {
+		this.id_produto = id_produto;
+	}
+
+	public List<Funcionario> getFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(List<Funcionario> funcionario) {
+		this.funcionario = funcionario;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id_produto);
@@ -140,8 +157,11 @@ public class Produto {
 
 	@Override
 	public String toString() {
-		return "Produto [id=" + id_produto + ", nome=" + nome + ", descricao=" + descricao + ", Estoque=" + Qtd_estoque
-				+ ", Cadastroc=" + data_cadastro + "valor="+ valor_unitario +"]";
+		return "Produto [id_produto=" + id_produto + ", nome=" + nome + ", descricao=" + descricao + ", Qtd_estoque="
+				+ Qtd_estoque + ", data_cadastro=" + data_cadastro + ", valor_unitario=" + valor_unitario + ", image="
+				+ Arrays.toString(image) + ", categoria=" + categoria + ", funcionario=" + funcionario + "]";
 	}
+
+	
 
 }

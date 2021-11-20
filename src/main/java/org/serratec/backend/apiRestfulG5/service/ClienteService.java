@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.serratec.backend.apiRestfulG5.domain.Cliente;
 import org.serratec.backend.apiRestfulG5.exception.ClienteNotFoundException;
-import org.serratec.backend.apiRestfulG5.exception.ParametroObrigatorioException;
+import org.serratec.backend.apiRestfulG5.exception.ParameterException;
 import org.serratec.backend.apiRestfulG5.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,8 +33,8 @@ public class ClienteService {
 		
 		throw new ClienteNotFoundException("Cliente com id " + id + " não encontrada");
 	}
-	public Cliente atualizar(Integer id, Cliente cliente) throws ParametroObrigatorioException, ClienteNotFoundException {
-		if(cliente == null) throw new ParametroObrigatorioException("Campo 'Cliente' é obrigatório");
+	public Cliente atualizar(Integer id, Cliente cliente) throws ParameterException, ClienteNotFoundException {
+		if(cliente == null) throw new ParameterException("Campo 'Cliente' é obrigatório");
 		
 		Cliente cliente1 = pesquisarPorId(id);
 		
@@ -70,8 +70,7 @@ public class ClienteService {
 	}
 	
 	public void deletarPorId(Integer id) throws ClienteNotFoundException{
-		Cliente cliente1 = pesquisarPorId(id);
-		clienteRepository.delete(cliente1);
+		clienteRepository.deleteById(id);
 	}
 }
 

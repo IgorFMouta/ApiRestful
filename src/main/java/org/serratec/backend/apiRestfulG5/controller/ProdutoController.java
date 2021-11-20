@@ -3,7 +3,7 @@ package org.serratec.backend.apiRestfulG5.controller;
 import java.util.List;
 
 import org.serratec.backend.apiRestfulG5.domain.Produto;
-import org.serratec.backend.apiRestfulG5.exception.ParametroObrigatorioException;
+import org.serratec.backend.apiRestfulG5.exception.ParameterException;
 import org.serratec.backend.apiRestfulG5.exception.ProdutoNotFoundException;
 import org.serratec.backend.apiRestfulG5.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,20 +37,20 @@ public class ProdutoController {
 		return produtoService.listar();
 	}
 	
-	@GetMapping("/{id}")
-	public Produto listarPorId(@PathVariable Long id_produto) throws ProdutoNotFoundException {
+	@GetMapping("/{id_produto}")
+	public Produto listarPorId(@PathVariable Integer id_produto) throws ProdutoNotFoundException {
 		return produtoService.listarPorId(id_produto);
 	}
 	
-	@PutMapping("/{id}")
-	public ResponseEntity<Void> atualizar(@PathVariable Long id_produto, @RequestBody(required = true) Produto produto)
-			throws ProdutoNotFoundException, ParametroObrigatorioException {
+	@PutMapping("/{id_produto}")
+	public ResponseEntity<Void> atualizar(@PathVariable Integer id_produto, @RequestBody(required = true) Produto produto)
+			throws ProdutoNotFoundException, ParameterException {
 		produtoService.atualizar(id_produto, produto);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/{id}")
-	public void deletarPorId(@PathVariable Long id_produto) throws ProdutoNotFoundException {
+	@DeleteMapping("/{id_produto}")
+	public void deletarPorId(@PathVariable Integer id_produto) throws ProdutoNotFoundException {
 		produtoService.deletarPorId(id_produto);
 	}
 }

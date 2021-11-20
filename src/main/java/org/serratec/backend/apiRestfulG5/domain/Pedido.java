@@ -31,10 +31,8 @@ public class Pedido {
 	@Column(name="Valor")
 	private Double valor;
 	
-	@Column(name="Codigo_Cliente", nullable = false)
-	private Integer idCliente;
 	
-	@Column(name="Status", nullable = false)
+	@Column(name="Status", nullable = true)
 	private PedidoStatus pedidoStatus;
 	
 	@ManyToOne
@@ -59,11 +57,17 @@ public class Pedido {
 	public void setValor(Double valor) {
 		this.valor = valor;
 	}
-	public Integer getIdCliente() {
-		return idCliente;
+	public PedidoStatus getPedidoStatus() {
+		return pedidoStatus;
 	}
-	public void setIdCliente(Integer idCliente) {
-		this.idCliente = idCliente;
+	public void setPedidoStatus(PedidoStatus pedidoStatus) {
+		this.pedidoStatus = pedidoStatus;
+	}
+	public Cliente getCliente() {
+		return cliente;
+	}
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 	
 	

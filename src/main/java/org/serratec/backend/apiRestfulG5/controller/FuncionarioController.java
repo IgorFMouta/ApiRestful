@@ -3,8 +3,9 @@ package org.serratec.backend.apiRestfulG5.controller;
 import java.util.List;
 
 import org.serratec.backend.apiRestfulG5.domain.Funcionario;
+import org.serratec.backend.apiRestfulG5.domain.Produto;
 import org.serratec.backend.apiRestfulG5.exception.FuncionarioNotFoundException;
-import org.serratec.backend.apiRestfulG5.exception.ParametroObrigatorioException;
+import org.serratec.backend.apiRestfulG5.exception.ParameterException;
 import org.serratec.backend.apiRestfulG5.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -56,7 +57,7 @@ public class FuncionarioController {
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<Void> atualizar(@PathVariable Integer id, @RequestBody(required = true) Funcionario funcionario)
-			throws FuncionarioNotFoundException, ParametroObrigatorioException {
+			throws FuncionarioNotFoundException, ParameterException {
 		funcionarioService.atualizar(id, funcionario);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}

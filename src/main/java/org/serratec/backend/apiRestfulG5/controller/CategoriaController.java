@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.serratec.backend.apiRestfulG5.domain.Categoria;
 import org.serratec.backend.apiRestfulG5.exception.CategoriaNotFoundException;
-import org.serratec.backend.apiRestfulG5.exception.ParametroObrigatorioException;
+import org.serratec.backend.apiRestfulG5.exception.ParameterException;
 import org.serratec.backend.apiRestfulG5.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,20 +36,20 @@ public class CategoriaController {
 		return categoriaService.listar();
 	}
 	
-	@GetMapping("/{id}")
-	public Categoria listarPorId(@PathVariable Long id_categoria) throws CategoriaNotFoundException {
+	@GetMapping("/{id_categoria}")
+	public Categoria listarPorId(@PathVariable Integer id_categoria) throws CategoriaNotFoundException {
 		return categoriaService.listarPorId(id_categoria);
 	}
 	
-	@PutMapping("/{id}")
-	public ResponseEntity<Void> atualizar(@PathVariable Long id_categoria, @RequestBody(required = true) Categoria categoria)
-			throws CategoriaNotFoundException, ParametroObrigatorioException {
+	@PutMapping("/{id_categoria}")
+	public ResponseEntity<Void> atualizar(@PathVariable Integer id_categoria, @RequestBody(required = true) Categoria categoria)
+			throws CategoriaNotFoundException, ParameterException {
 		categoriaService.substituir(id_categoria, categoria);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/{id}")
-	public void deletar(@PathVariable Long id_categoria) throws CategoriaNotFoundException {
+	@DeleteMapping("/{id_categoria}")
+	public void deletar(@PathVariable Integer id_categoria) throws CategoriaNotFoundException {
 		categoriaService.deletar(id_categoria);
 	}
 }

@@ -1,6 +1,7 @@
 package org.serratec.backend.apiRestfulG5.domain;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -41,6 +43,9 @@ public class Cliente {
 	
 	@Column(name = "telefone", length = 11, nullable = false)
 	private String telefone;
+	
+	@OneToMany(mappedBy = "cliente")
+	private List<Pedido> pedido;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_endereco")

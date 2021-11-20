@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.serratec.backend.apiRestfulG5.domain.Endereco;
 import org.serratec.backend.apiRestfulG5.exception.EnderecoNotFoundException;
-import org.serratec.backend.apiRestfulG5.exception.ParametroObrigatorioException;
+import org.serratec.backend.apiRestfulG5.exception.ParameterException;
 import org.serratec.backend.apiRestfulG5.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -57,7 +57,7 @@ public class EnderecoController {
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<Void> atualizar(@PathVariable Integer id, @RequestBody(required = true) Endereco endereco)
-			throws EnderecoNotFoundException, ParametroObrigatorioException {
+			throws EnderecoNotFoundException, ParameterException {
 		enderecoService.atualizar(id, endereco);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}

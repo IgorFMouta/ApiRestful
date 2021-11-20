@@ -20,7 +20,7 @@ public class Endereco {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(name = "cep", length = 9, nullable = false)
+	@Column(name = "cep", length = 10, nullable = false)
 	private String cep;
 	
 	@Column(name = "rua", length = 100, nullable = false)

@@ -61,8 +61,7 @@ public class ItemPedidoService {
 	}
 	
 	public void deletar(Integer id_item_pedido) throws ItemPedidoNotFoundException {
-		ItemPedido itemPedidoNoBanco = listarPorId(id_item_pedido);
-		itemPedidoRepository.delete(itemPedidoNoBanco);
+		itemPedidoRepository.deleteById(id_item_pedido);
 	}
 	
 }

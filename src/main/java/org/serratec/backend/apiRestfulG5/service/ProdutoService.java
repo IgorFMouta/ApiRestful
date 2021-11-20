@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.serratec.backend.apiRestfulG5.domain.Produto;
-import org.serratec.backend.apiRestfulG5.exception.ParametroObrigatorioException;
+import org.serratec.backend.apiRestfulG5.exception.ParameterException;
 import org.serratec.backend.apiRestfulG5.exception.ProdutoNotFoundException;
 import org.serratec.backend.apiRestfulG5.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class ProdutoService {
 	}
 	
 	
-	public Produto listarPorId(Long id_produto) throws ProdutoNotFoundException {
+	public Produto listarPorId(Integer id_produto) throws ProdutoNotFoundException {
 		Optional<Produto> opProduto = produtoRepository.findById(id_produto);
 		
 		if(opProduto.isPresent()) {
@@ -37,8 +37,8 @@ public class ProdutoService {
 	}
 
 	
-	public Produto atualizar(Long id_produto, Produto produto) throws ParametroObrigatorioException, ProdutoNotFoundException{
-		if(produto == null) throw new ParametroObrigatorioException("Campo 'Produto' é obrigatório");
+	public Produto atualizar(Integer id_produto, Produto produto) throws ParameterException, ProdutoNotFoundException{
+		if(produto == null) throw new ParameterException("Campo 'Produto' é obrigatório");
 	
 		Produto produtoBanco = listarPorId(id_produto);
 		
@@ -70,9 +70,9 @@ public class ProdutoService {
 	}
 		
 	
-	public void deletarPorId(Long id_produto) throws ProdutoNotFoundException{
-		Produto produtoBanco = listarPorId(id_produto);
-		produtoRepository.delete(produtoBanco);
+	public void deletarPorId(Integer id_produto) throws ProdutoNotFoundException{
+//		Produto produtoBanco = listarPorId(id_produto);
+		produtoRepository.deleteById(id_produto);
 	}
 	
 	

@@ -50,21 +50,21 @@ public class ClienteController {
 	}
 	
 
-	@GetMapping("/{id}")
-	public Cliente pesquisarPorId(@PathVariable Integer id) throws ClienteNotFoundException {
-		return clienteService.pesquisarPorId(id);
+	@GetMapping("/{id_cliente}")
+	public Cliente pesquisarPorId(@PathVariable Integer id_cliente) throws ClienteNotFoundException {
+		return clienteService.pesquisarPorId(id_cliente);
 	}
 	
-	@PutMapping("/{id}")
-	public ResponseEntity<Void> atualizar(@PathVariable Integer id, @RequestBody(required = true) Cliente cliente)
+	@PutMapping("/{id_cliente}")
+	public ResponseEntity<Void> atualizar(@PathVariable Integer id_cliente, @RequestBody(required = true) Cliente cliente)
 			throws ClienteNotFoundException, ParameterException {
-		clienteService.atualizar(id, cliente);
+		clienteService.atualizar(id_cliente, cliente);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/{id}")
-	public void deletarPorId(@PathVariable Integer id) throws ClienteNotFoundException {
-		clienteService.deletarPorId(id);
+	@DeleteMapping("/{id_cliente}")
+	public void deletarPorId(@PathVariable Integer id_cliente) throws ClienteNotFoundException {
+		clienteService.deletarPorId(id_cliente);
 	}
 }
 

@@ -24,19 +24,19 @@ public class EnderecoService {
 		return enderecoRepository.findAll();
 	}
 	
-	public Endereco pesquisarPorId(Integer id) throws EnderecoNotFoundException {
-		Optional<Endereco> opEndereco = enderecoRepository.findById(id);
+	public Endereco pesquisarPorId(Integer id_endereco) throws EnderecoNotFoundException {
+		Optional<Endereco> opEndereco = enderecoRepository.findById(id_endereco);
 
 		if(opEndereco.isPresent()) {
 			return opEndereco.get();
 		}
 		
-		throw new EnderecoNotFoundException("Endereco com id " + id + " não encontrada");
+		throw new EnderecoNotFoundException("Endereco com id " + id_endereco + " não encontrada");
 	}
-	public Endereco atualizar(Integer id, Endereco endereco) throws ParameterException, EnderecoNotFoundException {
+	public Endereco atualizar(Integer id_endereco, Endereco endereco) throws ParameterException, EnderecoNotFoundException {
 		if(endereco == null) throw new ParameterException("Campo 'Endereco' é obrigatório");
 		
-		Endereco endereco1 = pesquisarPorId(id);
+		Endereco endereco1 = pesquisarPorId(id_endereco);
 		
 		if(endereco.getCep() != null) {
 			endereco1.setCep(endereco.getCep());
@@ -69,8 +69,8 @@ public class EnderecoService {
 		return enderecoRepository.save(endereco1);
 	}
 	
-	public void deletarPorId(Integer id) throws EnderecoNotFoundException{
-		enderecoRepository.deleteById(id);
+	public void deletarPorId(Integer id_endereco) throws EnderecoNotFoundException{
+		enderecoRepository.deleteById(id_endereco);
 	
 	}
 }

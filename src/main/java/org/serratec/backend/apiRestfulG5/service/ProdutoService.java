@@ -47,7 +47,7 @@ public class ProdutoService {
 		}
 		
 		if(produto.getDescricao() != null) {
-			produtoBanco.setDescricao(produto.getDescricao());
+			produtoBanco.setDescricao(produto.getDescricao());	
 		}
 		
 		if(produto.getQtd_estoque() != null) {
@@ -61,17 +61,15 @@ public class ProdutoService {
 		if(produto.getValor_unitario() != null) {
 			produtoBanco.setValor_unitario(produto.getValor_unitario());
 		}
-		
 		if(produto.getImage() != null) {
 			produtoBanco.setImage(produto.getImage());
 		}
-		
+			
 		return produtoRepository.save(produtoBanco);		
 	}
 		
 	
 	public void deletarPorId(Integer id_produto) throws ProdutoNotFoundException{
-//		Produto produtoBanco = listarPorId(id_produto);
 		produtoRepository.deleteById(id_produto);
 	}
 	

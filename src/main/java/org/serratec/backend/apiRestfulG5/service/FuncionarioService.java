@@ -23,19 +23,19 @@ public class FuncionarioService {
 		return funcionarioRepository.findAll();
 	}
 	
-	public Funcionario pesquisarPorId(Integer id) throws FuncionarioNotFoundException {
-		Optional<Funcionario> opFuncionario = funcionarioRepository.findById(id);
+	public Funcionario pesquisarPorId(Integer id_funcionario) throws FuncionarioNotFoundException {
+		Optional<Funcionario> opFuncionario = funcionarioRepository.findById(id_funcionario);
 
 		if(opFuncionario.isPresent()) {
 			return opFuncionario.get();
 		}
 		
-		throw new FuncionarioNotFoundException("Funcionario com id " + id + " não encontrada");
+		throw new FuncionarioNotFoundException("Funcionario com id " + id_funcionario + " não encontrada");
 	}
-	public Funcionario atualizar(Integer id, Funcionario funcionario) throws ParameterException, FuncionarioNotFoundException {
+	public Funcionario atualizar(Integer id_funcionario, Funcionario funcionario) throws ParameterException, FuncionarioNotFoundException {
 		if(funcionario == null) throw new ParameterException("Campo 'Funcionario' é obrigatório");
 		
-		Funcionario funcionario1 = pesquisarPorId(id);
+		Funcionario funcionario1 = pesquisarPorId(id_funcionario);
 		
 		if(funcionario.getNome() != null) {
 			funcionario1.setNome(funcionario.getNome());
@@ -48,7 +48,7 @@ public class FuncionarioService {
 		return funcionarioRepository.save(funcionario1);
 	}
 	
-	public void deletarPorId(Integer id) throws FuncionarioNotFoundException{
-		funcionarioRepository.deleteById(id);
+	public void deletarPorId(Integer id_funcionario) throws FuncionarioNotFoundException{
+		funcionarioRepository.deleteById(id_funcionario);
 	}
 }

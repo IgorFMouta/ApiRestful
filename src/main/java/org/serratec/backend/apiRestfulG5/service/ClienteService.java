@@ -24,19 +24,19 @@ public class ClienteService {
 		return clienteRepository.findAll();
 	}
 	
-	public Cliente pesquisarPorId(Integer id) throws ClienteNotFoundException {
-		Optional<Cliente> opCliente = clienteRepository.findById(id);
+	public Cliente pesquisarPorId(Integer id_cliente) throws ClienteNotFoundException {
+		Optional<Cliente> opCliente = clienteRepository.findById(id_cliente);
 
 		if(opCliente.isPresent()) {
 			return opCliente.get();
 		}
 		
-		throw new ClienteNotFoundException("Cliente com id " + id + " não encontrada");
+		throw new ClienteNotFoundException("Cliente com id " + id_cliente + " não encontrada");
 	}
-	public Cliente atualizar(Integer id, Cliente cliente) throws ParameterException, ClienteNotFoundException {
+	public Cliente atualizar(Integer id_cliente, Cliente cliente) throws ParameterException, ClienteNotFoundException {
 		if(cliente == null) throw new ParameterException("Campo 'Cliente' é obrigatório");
 		
-		Cliente cliente1 = pesquisarPorId(id);
+		Cliente cliente1 = pesquisarPorId(id_cliente);
 		
 		if(cliente.getNome_cliente() != null) {
 			cliente1.setNome_cliente(cliente.getNome_cliente());
@@ -69,8 +69,8 @@ public class ClienteService {
 		return clienteRepository.save(cliente1);
 	}
 	
-	public void deletarPorId(Integer id) throws ClienteNotFoundException{
-		clienteRepository.deleteById(id);
+	public void deletarPorId(Integer id_cliente) throws ClienteNotFoundException{
+		clienteRepository.deleteById(id_cliente);
 	}
 }
 

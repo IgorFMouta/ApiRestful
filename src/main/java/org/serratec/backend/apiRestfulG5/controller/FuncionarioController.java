@@ -40,30 +40,32 @@ public class FuncionarioController {
 			@ApiResponse(code= 405, message= "Quando ocorre uma exceção")
 	})
 	
+	
+	public List<Funcionario> listarTodos(){
+		return funcionarioService.listar();
+	}
+	
 	@PostMapping
 	public ResponseEntity<Void> inserir(@RequestBody Funcionario funcionario) {
 		funcionarioService.inserir(funcionario);
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
-	
-	public List<Funcionario> listarTodos(){
-		return funcionarioService.listar();
-	}
 
-	@GetMapping("/{id}")
-	public Funcionario pesquisarPorId(@PathVariable Integer id) throws FuncionarioNotFoundException {
-		return funcionarioService.pesquisarPorId(id);
+
+	@GetMapping("/{id_funcionario}")
+	public Funcionario pesquisarPorId(@PathVariable Integer id_funcionario) throws FuncionarioNotFoundException {
+		return funcionarioService.pesquisarPorId(id_funcionario);
 	}
 	
-	@PutMapping("/{id}")
-	public ResponseEntity<Void> atualizar(@PathVariable Integer id, @RequestBody(required = true) Funcionario funcionario)
+	@PutMapping("/{id_funcionario}")
+	public ResponseEntity<Void> atualizar(@PathVariable Integer id_funcionario, @RequestBody(required = true) Funcionario funcionario)
 			throws FuncionarioNotFoundException, ParameterException {
-		funcionarioService.atualizar(id, funcionario);
+		funcionarioService.atualizar(id_funcionario, funcionario);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/{id}")
-	public void deletarPorId(@PathVariable Integer id) throws FuncionarioNotFoundException {
-		funcionarioService.deletarPorId(id);
+	@DeleteMapping("/{id_funcionario}")
+	public void deletarPorId(@PathVariable Integer id_funcionario) throws FuncionarioNotFoundException {
+		funcionarioService.deletarPorId(id_funcionario);
 	}
 }

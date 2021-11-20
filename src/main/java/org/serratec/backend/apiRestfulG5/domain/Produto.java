@@ -1,6 +1,5 @@
 package org.serratec.backend.apiRestfulG5.domain;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -30,8 +29,8 @@ public class Produto {
 	@Column(name = "descricao", length = 100, nullable = false)
 	private String descricao;
 
-	@Column(name = "Qtd_estoque", nullable = false)
-	private Integer Qtd_estoque;
+	@Column(name = "qtd_estoque", nullable = false)
+	private Integer qtd_estoque;
 
 	@Column(name = "data_cadastro", nullable = false)
 	private Date data_cadastro;
@@ -90,12 +89,14 @@ public class Produto {
 		this.descricao = descricao;
 	}
 
+	
+
 	public Integer getQtd_estoque() {
-		return Qtd_estoque;
+		return qtd_estoque;
 	}
 
 	public void setQtd_estoque(Integer qtd_estoque) {
-		Qtd_estoque = qtd_estoque;
+		this.qtd_estoque = qtd_estoque;
 	}
 
 	public Date getData_cadastro() {
@@ -155,12 +156,7 @@ public class Produto {
 		return Objects.equals(id_produto, other.id_produto);
 	}
 
-	@Override
-	public String toString() {
-		return "Produto [id_produto=" + id_produto + ", nome=" + nome + ", descricao=" + descricao + ", Qtd_estoque="
-				+ Qtd_estoque + ", data_cadastro=" + data_cadastro + ", valor_unitario=" + valor_unitario + ", image="
-				+ Arrays.toString(image) + ", categoria=" + categoria + ", funcionario=" + funcionario + "]";
-	}
+	
 
 	
 

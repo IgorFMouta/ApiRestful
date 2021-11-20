@@ -21,7 +21,7 @@ public class Pedido {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer IdPedido;
+	private Integer id_pedido;
 	
 	@Column(name="Data_Pedido")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -36,14 +36,14 @@ public class Pedido {
 	private PedidoStatus pedidoStatus;
 	
 	@ManyToOne
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "id_cliente")
 	private Cliente cliente;
 	
-	public Integer getIdPedido() {
-		return IdPedido;
+	public Integer getId_pedido() {
+		return id_pedido;
 	}
-	public void setIdPedido(Integer IdPedido) {
-		this.IdPedido = IdPedido;
+	public void setId_pedido(Integer id_pedido) {
+		this.id_pedido = id_pedido;
 	}
 	public Date getDataPedido() {
 		return dataPedido;

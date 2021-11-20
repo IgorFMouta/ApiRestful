@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class Funcionario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Integer id_funcionario;
 	
 	@Column (name = "nome_funcionario", length = 100, nullable = false)
 	private String nome;
@@ -22,11 +22,11 @@ public class Funcionario {
 	private String cpf;
 		
 	public Integer getId() {
-		return id;
+		return id_funcionario;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId(Integer id_funcionario) {
+		this.id_funcionario = id_funcionario;
 	}
 
 	public String getNome() {
@@ -47,7 +47,7 @@ public class Funcionario {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(cpf, id);
+		return Objects.hash(cpf, id_funcionario);
 	}
 
 	@Override
@@ -59,12 +59,12 @@ public class Funcionario {
 		if (getClass() != obj.getClass())
 			return false;
 		Funcionario other = (Funcionario) obj;
-		return Objects.equals(cpf, other.cpf) && Objects.equals(id, other.id);
+		return Objects.equals(cpf, other.cpf) && Objects.equals(id_funcionario, other.id_funcionario);
 	}
 
 	@Override
 	public String toString() {
-		return "Funcionario [id=" + id + ", nome=" + nome + ", cpf=" + cpf + "]";
+		return "Funcionario [id=" + id_funcionario + ", nome=" + nome + ", cpf=" + cpf + "]";
 	}
 	
 }

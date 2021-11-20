@@ -13,12 +13,11 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "endereco", schema = "public")
-
 public class Endereco {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Integer id_endereco;
 	
 	@Column(name = "cep", length = 10, nullable = false)
 	private String cep;
@@ -26,8 +25,8 @@ public class Endereco {
 	@Column(name = "rua", length = 100, nullable = false)
 	private String rua;
 	
-	@Column(name = "numero", nullable = false)
-	private Integer numero;
+	@Column(name = "numero", length = 10, nullable = false)
+	private String numero;
 	
 	@Column(name = "complemento", length = 20, nullable = false)
 	private String complemento;
@@ -38,7 +37,7 @@ public class Endereco {
 	@Column(name = "cidade", length = 30, nullable = false)
 	private String cidade;
 	
-	@Column(name = "estado", length = 2, nullable = false)
+	@Column(name = "estado", length = 10, nullable = false)
 	private String estado;
 	
 	@OneToMany(mappedBy = "endereco")
@@ -49,11 +48,11 @@ public class Endereco {
 	}
 
 	public Integer getId() {
-		return id;
+		return id_endereco;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId(Integer id_endereco) {
+		this.id_endereco = id_endereco;
 	}
 
 	public String getCep() {
@@ -72,11 +71,11 @@ public class Endereco {
 		this.rua = rua;
 	}
 
-	public Integer getNumero() {
+	public String getNumero() {
 		return numero;
 	}
 
-	public void setNumero(Integer numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 
@@ -112,17 +111,9 @@ public class Endereco {
 		this.estado = estado;
 	}
 	
-	public List<Cliente> getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(List<Cliente> cliente) {
-		this.cliente = cliente;
-	}
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(cep, id, numero);
+		return Objects.hash(cep, id_endereco, numero);
 	}
 
 	@Override
@@ -134,15 +125,9 @@ public class Endereco {
 		if (getClass() != obj.getClass())
 			return false;
 		Endereco other = (Endereco) obj;
-		return Objects.equals(cep, other.cep) && Objects.equals(id, other.id) && Objects.equals(numero, other.numero);
+		return Objects.equals(cep, other.cep) && Objects.equals(id_endereco, other.id_endereco) && Objects.equals(numero, other.numero);
 	}
 
-	@Override
-	public String toString() {
-		return "Endereco [id=" + id + ", cep=" + cep + ", rua=" + rua + ", numero=" + numero + ", complemento="
-				+ complemento + ", bairro=" + bairro + ", cidade=" + cidade + ", estado=" + estado + ", clientes="
-				+ cliente + "]";
-	}
 	
 	
 }

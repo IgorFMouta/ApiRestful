@@ -40,31 +40,33 @@ public class EnderecoController {
 			@ApiResponse(code= 405, message= "Quando ocorre uma exceção")
 	})
 	
+	public List<Endereco> listarTodos(){
+		return enderecoService.listar();
+	}
+
 	@PostMapping
 	public ResponseEntity<Void> inserir(@RequestBody Endereco endereco) {
 		enderecoService.inserir(endereco);
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
 	
-	public List<Endereco> listarTodos(){
-		return enderecoService.listar();
-	}
+	
 
-	@GetMapping("/{id}")
-	public Endereco pesquisarPorId(@PathVariable Integer id) throws EnderecoNotFoundException {
-		return enderecoService.pesquisarPorId(id);
+	@GetMapping("/{id_endereco}")
+	public Endereco pesquisarPorId(@PathVariable Integer id_endereco) throws EnderecoNotFoundException {
+		return enderecoService.pesquisarPorId(id_endereco);
 	}
 	
-	@PutMapping("/{id}")
+	@PutMapping("/{id_endereco}")
 	public ResponseEntity<Void> atualizar(@PathVariable Integer id, @RequestBody(required = true) Endereco endereco)
 			throws EnderecoNotFoundException, ParameterException {
 		enderecoService.atualizar(id, endereco);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/{id}")
-	public void deletarPorId(@PathVariable Integer id) throws EnderecoNotFoundException {
-		enderecoService.deletarPorId(id);
+	@DeleteMapping("/{id_endereco}")
+	public void deletarPorId(@PathVariable Integer id_endereco) throws EnderecoNotFoundException {
+		enderecoService.deletarPorId(id_endereco);
 	}
 }
 

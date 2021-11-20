@@ -26,15 +26,15 @@ public class ProdutoController {
 	@Autowired
 	private ProdutoService produtoService;
 	
+	@GetMapping
+	public List<Produto> listar() {
+		return produtoService.listar();
+	}
+		
 	@PostMapping
 	public ResponseEntity<Void> inserir(@RequestBody Produto produto) {
 		produtoService.inserir(produto);
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
-	}
-	
-	@GetMapping
-	public List<Produto> listar() {
-		return produtoService.listar();
 	}
 	
 	@GetMapping("/{id_produto}")

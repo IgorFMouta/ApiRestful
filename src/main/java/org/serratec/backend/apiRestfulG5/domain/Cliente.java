@@ -21,7 +21,7 @@ public class Cliente {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Integer id_cliente;
 	
 	@Column(name = "nome", length = 60, nullable = false)
 	private String nome_cliente;
@@ -56,11 +56,11 @@ public class Cliente {
 	}
 
 	public Integer getId() {
-		return id;
+		return id_cliente;
 	}
 
 	public void setId(Integer id) {
-		this.id = id;
+		this.id_cliente = id;
 	}
 
 	public String getNome_cliente() {
@@ -129,7 +129,7 @@ public class Cliente {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(cpf, id, telefone);
+		return Objects.hash(cpf, id_cliente, telefone);
 	}
 
 	@Override
@@ -141,16 +141,10 @@ public class Cliente {
 		if (getClass() != obj.getClass())
 			return false;
 		Cliente other = (Cliente) obj;
-		return Objects.equals(cpf, other.cpf) && Objects.equals(id, other.id)
+		return Objects.equals(cpf, other.cpf) && Objects.equals(id_cliente, other.id_cliente)
 				&& Objects.equals(telefone, other.telefone);
 	}
 
-	@Override
-	public String toString() {
-		return "Cliente [id=" + id + ", nome_cliente=" + nome_cliente + ", nome_usuario=" + nome_usuario + ", email="
-				+ email + ", senha=" + senha + ", cpf=" + cpf + ", dataNasc=" + dataNasc + ", telefone=" + telefone
-				+ "]";
-	}
 	
 	
 }

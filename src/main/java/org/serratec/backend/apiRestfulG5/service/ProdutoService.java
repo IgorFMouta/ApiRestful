@@ -23,13 +23,10 @@ public class ProdutoService {
 	
 	public Produto listarPorId(Integer id_produto) throws ProdutoNotFoundException {
 		Optional<Produto> opProduto = produtoRepository.findById(id_produto);
-		
 		if(opProduto.isPresent()) {
 			return opProduto.get();
 		}
-		
-		throw new ProdutoNotFoundException("O cliente com a id " + id_produto + " não foi encontrado");
-		
+		throw new ProdutoNotFoundException("O cliente com a id " + id_produto + " não foi encontrado");		
 	}
 		
 	public Produto inserir(Produto produto) {

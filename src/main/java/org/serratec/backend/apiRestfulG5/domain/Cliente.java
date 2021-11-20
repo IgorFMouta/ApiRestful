@@ -38,7 +38,7 @@ public class Cliente {
 	@Column(name = "cpf", length = 15, unique = true, nullable = false)
 	private String cpf;
 	
-	@Column(name = "data_nasc", nullable = true)
+	@Column(name = "data_nasc", nullable = false)
 	private LocalDate dataNasc;
 	
 	@Column(name = "telefone", length = 11, nullable = false)
@@ -46,29 +46,34 @@ public class Cliente {
 	
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedido;
+
 	
+	//Ta dando ruim aqui
 	@ManyToOne
 	@JoinColumn(name = "id_endereco")
 	private Endereco endereco;
+	
 	
 	public Cliente() {
 		super();
 	}
 
-	public Integer getId() {
+	
+
+	public Integer getId_cliente() {
 		return id_cliente;
 	}
-
-	public void setId(Integer id) {
-		this.id_cliente = id;
+	
+	public void setId_cliente(Integer id_cliente) {
+		this.id_cliente = id_cliente;
 	}
 
 	public String getNome_cliente() {
 		return nome_cliente;
 	}
 
-	public void setNome_cliente(String nome_completo) {
-		this.nome_cliente = nome_completo;
+	public void setNome_cliente(String nome_cliente) {
+		this.nome_cliente = nome_cliente;
 	}
 
 	public String getNome_usuario() {
@@ -82,7 +87,7 @@ public class Cliente {
 	public String getEmail() {
 		return email;
 	}
-
+	
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -94,7 +99,7 @@ public class Cliente {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
+	
 	public String getCpf() {
 		return cpf;
 	}
@@ -106,7 +111,7 @@ public class Cliente {
 	public LocalDate getDataNasc() {
 		return dataNasc;
 	}
-
+	
 	public void setDataNasc(LocalDate dataNasc) {
 		this.dataNasc = dataNasc;
 	}
@@ -119,13 +124,23 @@ public class Cliente {
 		this.telefone = telefone;
 	}
 
+	public List<Pedido> getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(List<Pedido> pedido) {
+		this.pedido = pedido;
+	}
+
 	public Endereco getEndereco() {
 		return endereco;
 	}
 
+
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
+
 
 	@Override
 	public int hashCode() {
@@ -144,6 +159,16 @@ public class Cliente {
 		return Objects.equals(cpf, other.cpf) && Objects.equals(id_cliente, other.id_cliente)
 				&& Objects.equals(telefone, other.telefone);
 	}
+
+
+	@Override
+	public String toString() {
+		return "Cliente [id_cliente=" + id_cliente + ", nome_cliente=" + nome_cliente + ", nome_usuario=" + nome_usuario
+				+ ", email=" + email + ", senha=" + senha + ", cpf=" + cpf + ", dataNasc=" + dataNasc + ", telefone="
+				+ telefone + ", pedido=" + pedido + ", endereco=" + endereco + "]";
+	}
+	
+	
 
 	
 	

@@ -58,9 +58,9 @@ public class EnderecoController {
 	}
 	
 	@PutMapping("/{id_endereco}")
-	public ResponseEntity<Void> atualizar(@PathVariable Integer id, @RequestBody(required = true) Endereco endereco)
+	public ResponseEntity<Void> atualizar(@PathVariable Integer id_endereco, @RequestBody(required = true) Endereco endereco)
 			throws EnderecoNotFoundException, ParameterException {
-		enderecoService.atualizar(id, endereco);
+		enderecoService.atualizar(id_endereco, endereco);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	

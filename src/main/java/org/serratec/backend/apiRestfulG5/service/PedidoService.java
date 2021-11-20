@@ -23,26 +23,26 @@ public class PedidoService {
 		return pedidoRepository.findAll();
 	}
 
-	public Pedido listarPorid(Integer idPedido) throws DataNotFoundException {
-		Optional<Pedido> opPedido = pedidoRepository.findById(idPedido);
+	public Pedido listarPorid(Integer id_pedido) throws DataNotFoundException {
+		Optional<Pedido> opPedido = pedidoRepository.findById(id_pedido);
 
 		if (opPedido.isPresent()) {
 			return opPedido.get();
 		}
 
-		throw new DataNotFoundException("Pedido com código " + idPedido + " não encontrada");
+		throw new DataNotFoundException("Pedido com código " + id_pedido + " não encontrada");
 	}
 
-	public Pedido substituir(Integer idPedido, Pedido pedido)
+	public Pedido substituir(Integer id_pedido, Pedido pedido)
 			throws ParameterException, DataNotFoundException {
 		if (pedido == null)
 			throw new ParameterException("Campo 'Pedido' é obrigatório");
 
-		Pedido pedidoNoBanco = listarPorid(idPedido);
+		Pedido pedidoNoBanco = listarPorid(id_pedido);
 
 
-		if (pedido.getIdPedido() != null) {
-			pedidoNoBanco.setIdPedido(pedido.getIdPedido());
+		if (pedido.getId_pedido() != null) {
+			pedidoNoBanco.setId_pedido(pedido.getId_pedido());
 		}
 
 		if (pedido.getDataPedido() != null) {
@@ -56,7 +56,7 @@ public class PedidoService {
 		return pedidoRepository.save(pedidoNoBanco);
 	}
 
-	public void deletar(Integer idPedido) throws DataNotFoundException {
-		pedidoRepository.deleteById(idPedido);
+	public void deletar(Integer id_pedido) throws DataNotFoundException {
+		pedidoRepository.deleteById(id_pedido);
 	}
 }

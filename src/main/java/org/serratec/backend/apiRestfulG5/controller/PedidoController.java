@@ -36,21 +36,21 @@ public class PedidoController {
 		return pedidoService.listar();
 	}
 	
-	@GetMapping("/{idPedido}")
-	public Pedido listarPorId(@PathVariable Integer id) throws PedidoNotFoundException, DataNotFoundException {
-		return pedidoService.listarPorid(id);
+	@GetMapping("/{id_pedido}")
+	public Pedido listarPorId(@PathVariable Integer id_pedido) throws PedidoNotFoundException, DataNotFoundException {
+		return pedidoService.listarPorid(id_pedido);
 	}
 	
-	@PutMapping("/{idPedido}")
-	public ResponseEntity<Void> substituir(@PathVariable Integer id, @RequestBody(required = true) Pedido pedido)
+	@PutMapping("/{id_pedido}")
+	public ResponseEntity<Void> substituir(@PathVariable Integer id_pedido, @RequestBody(required = true) Pedido pedido)
 			throws PedidoNotFoundException, ParameterException, DataNotFoundException {
-		pedidoService.substituir(id, pedido);
+		pedidoService.substituir(id_pedido, pedido);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/{idPedido}")
-	public void deletar(@PathVariable Integer id) throws PedidoNotFoundException, DataNotFoundException {
-		pedidoService.deletar(id);
+	@DeleteMapping("/{id_pedido}")
+	public void deletar(@PathVariable Integer id_pedido) throws PedidoNotFoundException, DataNotFoundException {
+		pedidoService.deletar(id_pedido);
 	}
 
 }

@@ -1,6 +1,7 @@
 package org.serratec.backend.apiRestfulG5.domain;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -9,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -42,6 +45,13 @@ public class Produto {
 	@ManyToOne
 	@JoinColumn(name = "id_categoria")
 	private Categoria categoria;
+	
+	@ManyToMany
+	@JoinTable(name = "funcionario_produto", joinColumns = 
+	@JoinColumn(name = "id_produto"),
+	inverseJoinColumns = @JoinColumn(name = "id_funcionario"))
+	private List<Funcionario> funcionario;
+	
 	
 	public Categoria getCategoria() {
 		return categoria;

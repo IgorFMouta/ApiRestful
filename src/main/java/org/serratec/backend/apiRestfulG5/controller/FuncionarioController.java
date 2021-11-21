@@ -3,7 +3,6 @@ package org.serratec.backend.apiRestfulG5.controller;
 import java.util.List;
 
 import org.serratec.backend.apiRestfulG5.domain.Funcionario;
-import org.serratec.backend.apiRestfulG5.domain.Produto;
 import org.serratec.backend.apiRestfulG5.exception.FuncionarioNotFoundException;
 import org.serratec.backend.apiRestfulG5.exception.ParameterException;
 import org.serratec.backend.apiRestfulG5.service.FuncionarioService;

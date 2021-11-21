@@ -3,11 +3,9 @@ package org.serratec.backend.apiRestfulG5.controller;
 import java.util.List;
 
 import org.serratec.backend.apiRestfulG5.domain.ItemPedido;
-import org.serratec.backend.apiRestfulG5.domain.Pedido;
 import org.serratec.backend.apiRestfulG5.exception.DataNotFoundException;
 import org.serratec.backend.apiRestfulG5.exception.ItemPedidoNotFoundException;
 import org.serratec.backend.apiRestfulG5.exception.ParameterException;
-import org.serratec.backend.apiRestfulG5.exception.PedidoNotFoundException;
 import org.serratec.backend.apiRestfulG5.service.ItemPedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
